@@ -236,6 +236,20 @@ class EventFormType extends AbstractType
         ];
     }
 
+    /*
+     * Compare dates
+     */
+    private function compareStartAndEndDates(){
+       if(isset($_POST['event'])){
+           if($_POST['event']['start_date'] > $_POST['event']['end_date']){
+               $constraints = [new Assert\Date()];
+               return [
+                   'constraints' => $constraints['message'] = "End Date should cannot end before start date."
+               ];
+           }
+       }
+    }
+
     /**
      * Returns an array containing associative arrays of timezone continents & cities.
      *
